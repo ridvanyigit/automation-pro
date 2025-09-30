@@ -1,0 +1,214 @@
+{
+  "name": "Notion-Drive-PostgreSQL",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "databaseId": {
+          "__rl": true,
+          "value": "https://www.notion.so/27c710d3dc77803aa54cd29038db0d82?v=27c710d3dc7780a2a5dd000c02122ec8",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.notionTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2f5ea81d-3ff1-43f8-aa21-b04b1cd2d38c",
+      "name": "Notion Trigger",
+      "credentials": {
+        "notionApi": {
+          "id": "BigxRjSsgoRGzAzL",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clients",
+          "mode": "list",
+          "cachedResultName": "clients"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $('Notion Trigger').item.json.Name }}",
+            "email": "={{ $('Notion Trigger').item.json[\"E-Mail\"] }}",
+            "vat_no": "={{ $('Notion Trigger').item.json[\"UID-Nummer\"] }}",
+            "status": "={{ $('Notion Trigger').item.json.Status }}",
+            "notion_id": "={{ $('Notion Trigger').item.json.id }}",
+            "id": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "notion_id",
+              "displayName": "notion_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "vat_no",
+              "displayName": "vat_no",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a5a5ca3a-b9a6-4e69-b61f-1d325100fe52",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "TwFI2Z9Y5AsiolfY",
+          "name": "Postgres DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $json.Name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1fVcmUpt4oWkANlKzR5dvioAFx6A516aF",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5618ce2b-9043-4559-bfc0-8ecc06b05394",
+      "name": "Drive Create folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "blR5xhuO3ZwSNNLn",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Notion Trigger": {
+      "main": [
+        [
+          {
+            "node": "Drive Create folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Create folder": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8df6d10c-6670-4801-8bb8-2db445299484",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "90560a5f991bae9d32e905e1175c775c16bf02339fd50aa71d69f42981a54923"
+  },
+  "id": "IJGaFoPRh5maX0iB",
+  "tags": []
+}

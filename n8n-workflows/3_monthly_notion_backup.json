@@ -1,0 +1,338 @@
+{
+  "name": "Aylık Notion Yedeklemesi",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtHour": 3
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "854048cc-4730-49bf-87ab-81df19f85661",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "29fd19aa-d9ff-47b4-986e-1901be46aebe",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "name": "=Kunden_Yedek_{{$now.toFormat('yyyy-MM-dd')}}.csv",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1wcWyqfGc20N80ZEIn3RdVwwlNKhcn2Pr",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        832,
+        0
+      ],
+      "id": "80e2457a-9dd5-4996-8f88-c419288a187a",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "blR5xhuO3ZwSNNLn",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "https://www.notion.so/27c710d3dc7780c89593e947d7b85b4d?v=27c710d3dc77800d816c000c99d8e233",
+          "mode": "url"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        256
+      ],
+      "id": "8dcb8f89-f90e-472d-88bb-015c6deb8a9f",
+      "name": "Get Aufgaben",
+      "credentials": {
+        "notionApi": {
+          "id": "BigxRjSsgoRGzAzL",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "https://www.notion.so/27c710d3dc77803aa54cd29038db0d82?v=27c710d3dc7780a2a5dd000c02122ec8",
+          "mode": "url"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "de88681a-3d94-4eff-b311-d0027a3ee9d8",
+      "name": "Get Kunden",
+      "credentials": {
+        "notionApi": {
+          "id": "BigxRjSsgoRGzAzL",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "https://www.notion.so/27c710d3dc77809a9272e17f5415b52b?v=27c710d3dc778070907f000c085ecfec",
+          "mode": "url"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        -240
+      ],
+      "id": "438c7fe0-9c34-4a09-b93d-dc10d6f842fa",
+      "name": "Get Projekte",
+      "credentials": {
+        "notionApi": {
+          "id": "BigxRjSsgoRGzAzL",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        -240
+      ],
+      "id": "d5366d0b-fe4a-4462-bce7-7273bf979db5",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "name": "=Projekte_Yedek_{{$now.toFormat('yyyy-MM-dd')}}.csv",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1wcWyqfGc20N80ZEIn3RdVwwlNKhcn2Pr",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        832,
+        -240
+      ],
+      "id": "fcafc677-c986-401a-9667-799cd04b3aae",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "blR5xhuO3ZwSNNLn",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        256
+      ],
+      "id": "a5e93606-e842-4122-93ea-af3efc29968d",
+      "name": "Convert to File2"
+    },
+    {
+      "parameters": {
+        "name": "=Aufgaben_Yedek_{{$now.toFormat('yyyy-MM-dd')}}.csv",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1wcWyqfGc20N80ZEIn3RdVwwlNKhcn2Pr",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        832,
+        256
+      ],
+      "id": "55bf96c4-a1f6-480f-8252-216351341d9e",
+      "name": "Upload file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "blR5xhuO3ZwSNNLn",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Projekte",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Kunden",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Aufgaben",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Kunden": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Projekte": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Aufgaben": {
+      "main": [
+        [
+          {
+            "node": "Convert to File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File2": {
+      "main": [
+        [
+          {
+            "node": "Upload file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ee4fedf1-6f6b-4ef7-829f-197d460d1c78",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "90560a5f991bae9d32e905e1175c775c16bf02339fd50aa71d69f42981a54923"
+  },
+  "id": "EuQ8vVhSfqDUKTrS",
+  "tags": []
+}
