@@ -69,6 +69,7 @@
 *   **Docker Desktop:** To run the containerized applications. [Download Docker](https://www.docker.com/products/docker-desktop/).
 *   **A Notion Account:** With a workspace to create databases.
 *   **A Google Account:** For Google Drive and Google Sheets access.
+> 🚀 **Looking to install and run this project?** Check out our simple, step-by-step **[Setup Guide (SETUP.md)](SETUP.md)**.
 
 ---
 
