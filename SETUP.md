@@ -23,7 +23,7 @@ Before you begin, you only need one thing installed on your system:
         <strong>Clone the Repository</strong><br>
         Open your terminal and clone this project to your desired location (e.g., your Desktop).
         <br>
-        <pre><code style="background-color: #160202ff; padding: 5px; border-radius: 4px;">git clone https://github.com/your-username/self-hosted-business-hub.git</code></pre>
+        <pre><code style="background-color: #160202ff; padding: 5px; border-radius: 4px;">https://github.com/ridvanyigit/self-hosted-business-hub.git</code></pre>
       </li>
       <br>
       <li>
